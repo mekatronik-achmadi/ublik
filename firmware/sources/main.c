@@ -46,7 +46,6 @@ int main(void) {
 
     while (true){
 
-
         if( (chk_lamp() != 1) && (chk_pv() !=1) ){
 #if USE_STANDBY
             pin_deinit();
@@ -60,6 +59,20 @@ int main(void) {
 #endif
         }
 
+        if(chk_lamp()==1){
+            Lamp_ON();
+            led_ind_lamp();
+        }
+        else{
+            Lamp_OFF();
+        }
+
+        if(chk_pv()==1){
+            led_ind_pv();
+        }
+
+
+        delay(0xAFFFFF);
     }
     return 0;
 }
