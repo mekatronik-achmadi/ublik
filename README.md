@@ -9,3 +9,4 @@ I’d like any feedback on things people who understand how Solar Home System su
 
 I call this project as Ublik. This name come from traditional oil lamp used in my country before modern electric lamp replaced it
 
+![alt tag](https://raw.githubusercontent.com/mekatronik-achmadi/ublik/master/logo/ublik.png)
