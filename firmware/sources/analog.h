@@ -1,6 +1,8 @@
 #ifndef ANALOG_H
 #define ANALOG_H
 
+#define analog_tunda 0xAFFFF
+
 #define ADC_GRP1_NUM_CHANNELS   1
 #define ADC_GRP1_BUF_DEPTH      100
 
@@ -11,6 +13,7 @@
 void analog_init(void);
 void analog_deinit(void);
 void analog_read(void);
+void analog_print(void);
 
 uint8_t chk_lamp(void);
 

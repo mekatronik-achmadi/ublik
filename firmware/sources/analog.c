@@ -2,7 +2,7 @@
 
 static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
 static uint32_t sum_adc_lamp;
-adcsample_t adc_lamp;
+static adcsample_t adc_lamp;
 
 void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n){
     (void) buffer;
@@ -42,9 +42,9 @@ void analog_init(void){
 }
 
 void analog_read(void){
-    delay(0xAFFFF);
+    delay(analog_tunda);
     adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-    delay(0xAFFFF);
+    delay(analog_tunda);
 }
 
 void analog_deinit(void){
@@ -53,10 +53,18 @@ void analog_deinit(void){
     palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_RESET);
 }
 
+void analog_print(void){
+
+#if USE_COMMS
+    chprintf(CHP,"a-lamp = %4d \r\n",adc_lamp);
+#endif
+
+}
+
 uint8_t chk_lamp(void){
-    delay(0xAFFFF);
+    delay(analog_tunda);
     adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-    delay(0xAFFFF);
+    delay(analog_tunda);
 
     if(adc_lamp>=MIN_ADC_LAMP){
         return 1;

@@ -58,3 +58,17 @@ uint8_t chk_pv(void){
 
     return result;
 }
+
+void led_ind_lamp(void){
+    palSetPad(GPIOB,led_lamp_pin);
+    delay(ind_tunda);
+    palClearPad(GPIOB,led_lamp_pin);
+    delay(ind_tunda);
+}
+
+void led_ind_pv(void){
+    palSetPad(GPIOB,led_pv_pin);
+    delay(ind_tunda);
+    palClearPad(GPIOB,led_pv_pin);
+    delay(ind_tunda);
+}

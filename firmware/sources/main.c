@@ -1,40 +1,64 @@
 #include "inklusi.h"
 
-#define coba_tunda 0xAFFF
+int main(void) {
 
-extern adcsample_t adc_lamp;
+    /*
+     * Init All peripheral
+     */
 
-void all_init(void){
     halInit();
     chSysInit();
 
     pin_init();
-//    comms_init();
-//    analog_init();
-//    saver_init();
+    analog_init();
 
-}
+#if USE_SLEEP
+    saver_init();
+#endif
 
-void led_blink(uint8_t led_pin){
-    palSetPad(GPIOB, led_pin);
-    delay(coba_tunda);
-    palClearPad(GPIOB, led_pin);
-    delay(coba_tunda);
-}
+#if USE_COMMS
+    comms_init();
+#endif
 
-int main(void) {
+    Ind_ON();
+    delay(ind_tunda);
+    Ind_OFF();
+    delay(ind_tunda);
 
-    all_init();
+    /*
+     * Check lamp
+     */
+    Lamp_ON();
+    if(chk_lamp()==1){
+        Lamp_ON();
+        led_ind_lamp();
+    }
+    else{
+        Lamp_OFF();
+    }
+
+    /*
+     *Check pv
+     */
+    if(chk_pv()==1){
+        led_ind_pv();
+    }
 
     while (true){
-        led_blink(led_pv_pin);
-        led_blink(led_lamp_pin);
-        led_blink(led_ind_pin);
-        led_blink(led_batt4_pin);
-        led_blink(led_batt3_pin);
-        led_blink(led_batt2_pin);
-        led_blink(led_batt1_pin);
-        delay(coba_tunda);
+
+
+        if( (chk_lamp() != 1) && (chk_pv() !=1) ){
+#if USE_STANDBY
+            pin_deinit();
+            analog_deinit();
+
+#if USE_COMMS
+            comms_deinit();
+#endif
+
+            standby_init();
+#endif
+        }
 
     }
     return 0;

@@ -2,7 +2,7 @@
 
 Hello everybody out there
 
-I’m doing a free customizable mini Solar Home System (just a hobby, won’t be big and
+I’m doing a free customizable and developer-friendly mini Solar Home System (just a hobby, won’t be big and
 professional like many vendors nowadays) 
 
 I’d like any feedback on things people who understand how Solar Home System supposed to be
