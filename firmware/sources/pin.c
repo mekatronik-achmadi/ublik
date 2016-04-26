@@ -59,6 +59,20 @@ uint8_t chk_pv(void){
     return result;
 }
 
+void led_ind_test(void){
+    Ind_ON();
+    delay(ind_tunda);
+    Ind_OFF();
+    delay(ind_tunda);
+}
+
+void led_ind_wkupslp(void){
+    Ind_ON();
+    delay(ind_sleep);
+    Ind_OFF();
+    delay(ind_sleep);
+}
+
 void led_ind_lamp(void){
     palSetPad(GPIOB,led_lamp_pin);
     delay(ind_tunda);
@@ -71,4 +85,32 @@ void led_ind_pv(void){
     delay(ind_tunda);
     palClearPad(GPIOB,led_pv_pin);
     delay(ind_tunda);
+}
+
+void led_ind_batt(void){
+    uint8_t stt;
+
+    stt=chk_batt();
+
+    if(stt==0){
+        palClearPad(GPIOB, led_batt1_pin);
+    }
+    else if(stt==1){
+        palClearPad(GPIOB, led_batt1_pin);
+    }
+    else if(stt==2){
+        palClearPad(GPIOB, led_batt2_pin);
+    }
+    else if(stt==3){
+        palClearPad(GPIOB, led_batt3_pin);
+    }
+    else if(stt==4){
+        palClearPad(GPIOB, led_batt4_pin);
+    }
+
+    delay(ind_tunda);
+    palClearPad(GPIOB, led_batt4_pin);
+    palClearPad(GPIOB, led_batt3_pin);
+    palClearPad(GPIOB, led_batt2_pin);
+    palClearPad(GPIOB, led_batt1_pin);
 }

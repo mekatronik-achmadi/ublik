@@ -55,6 +55,7 @@ static void rtc_cb(RTCDriver *rtcp, rtcevent_t event) {
     rtcSetCallback(&RTCD1, NULL);
 
     /* your handler routine here */
+    led_ind_wkupslp();
 
     osalSysLockFromISR();
     chBSemSignalI(&alarm_sem);

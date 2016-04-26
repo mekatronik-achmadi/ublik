@@ -12,6 +12,7 @@ int main(void) {
     pin_init();
     analog_init();
 
+
 #if USE_SLEEP
     saver_init();
 #endif
@@ -20,10 +21,12 @@ int main(void) {
     comms_init();
 #endif
 
-    Ind_ON();
-    delay(ind_tunda);
-    Ind_OFF();
-    delay(ind_tunda);
+    led_ind_test();
+
+    /*
+     * Check batt
+     */
+    led_ind_batt();
 
     /*
      * Check lamp
@@ -46,6 +49,21 @@ int main(void) {
 
     while (true){
 
+#if USE_COMMS
+        analog_print();
+        led_ind_test();
+#endif
+        if((chk_lamp()==1)&&(chk_batt()==1)){
+            Lamp_OFF();
+        }
+
+        PV_ON();
+        delay(ind_tunda);
+
+        if((chk_pv()==1)&&(chk_batt()==4)){
+            PV_OFF();
+        }
+
         if( (chk_lamp() != 1) && (chk_pv() !=1) ){
 #if USE_STANDBY
             pin_deinit();
@@ -57,6 +75,10 @@ int main(void) {
 
             standby_init();
 #endif
+        }
+        else{
+            alarm_init();
+            sleep_init();
         }
 
         if(chk_lamp()==1){
@@ -72,7 +94,7 @@ int main(void) {
         }
 
 
-        delay(0xAFFFFF);
+        delay(process_tunda);
     }
     return 0;
 }

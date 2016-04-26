@@ -5,6 +5,7 @@
 
 #define ind_sleep 0xAFFF
 #define ind_tunda 0xAFFFF
+#define process_tunda 0xAFFFF
 
 #define chk_pv_pin 0 //A
 #define chk_lamp_pin 3 //A
@@ -28,6 +29,9 @@
 #define Lamp_ON() palSetPad(GPIOB, con_lamp_pin)
 #define Lamp_OFF() palClearPad(GPIOB, con_lamp_pin);
 
+#define PV_OFF() palSetPad(GPIOB,con_pv_pin)
+#define PV_ON() palClearPad(GPIOB,con_pv_pin)
+
 void delay(__IO uint32_t nCount);
 
 void led_pin_init(void);
@@ -37,8 +41,11 @@ void chk_pv_pin_init(void);
 void pin_init(void);
 void pin_deinit(void);
 
+void led_ind_test(void);
+void led_ind_wkupslp(void);
 void led_ind_lamp(void);
 void led_ind_pv(void);
+void led_ind_batt(void);
 
 uint8_t chk_pv(void);
 

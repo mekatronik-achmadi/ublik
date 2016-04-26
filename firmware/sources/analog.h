@@ -3,12 +3,17 @@
 
 #define analog_tunda 0xAFFFF
 
-#define ADC_GRP1_NUM_CHANNELS   1
+#define ADC_GRP1_NUM_CHANNELS   2
 #define ADC_GRP1_BUF_DEPTH      100
 
 #define ADC_LAMP_N 3
 #define ADC_LAMP_CHANNEL ADC_CHANNEL_IN3
-#define ADC_LAMP_SMPR_ ADC_SMPR2_SMP_AN3
+#define ADC_LAMP_SMPR ADC_SMPR2_SMP_AN3
+
+
+#define ADC_BATT_N 1
+#define ADC_BATT_CHANNEL ADC_CHANNEL_IN1
+#define ADC_BATT_SMPR ADC_SMPR2_SMP_AN1
 
 void analog_init(void);
 void analog_deinit(void);
@@ -16,5 +21,6 @@ void analog_read(void);
 void analog_print(void);
 
 uint8_t chk_lamp(void);
+uint8_t chk_batt(void);
 
 #endif // ANALOG_H
