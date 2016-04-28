@@ -5,6 +5,7 @@
 
 #define ind_sleep 0xAFFF
 #define ind_tunda 0xAFFFF
+#define con_tunda 0xAFFF
 #define process_tunda 0xAFFFF
 
 #define chk_pv_pin 0 //A

@@ -32,6 +32,7 @@ int main(void) {
      * Check lamp
      */
     Lamp_ON();
+    delay(con_tunda);
     if(chk_lamp()==1){
         Lamp_ON();
         led_ind_lamp();
@@ -44,6 +45,7 @@ int main(void) {
      * Check usb
      */
     Usb_ON();
+    delay(con_tunda);
     if(chk_usb()==1){
         Usb_ON();
         led_ind_usb();
@@ -74,7 +76,7 @@ int main(void) {
         }
 
         PV_ON();
-        delay(ind_tunda);
+        delay(con_tunda);
 
         if((chk_pv()==1)&&(chk_batt()==4)){
             PV_OFF();
