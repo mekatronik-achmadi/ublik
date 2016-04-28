@@ -1,8 +1,8 @@
 #include "inklusi.h"
 
 static adcsample_t samples[ADC_GRP1_NUM_CHANNELS * ADC_GRP1_BUF_DEPTH];
-static uint32_t sum_adc_lamp,sum_adc_batt;
-static adcsample_t adc_lamp,adc_batt;
+static uint32_t sum_adc_lamp,sum_adc_usb,sum_adc_batt;
+static adcsample_t adc_lamp,adc_usb,adc_batt;
 
 void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n){
     (void) buffer;
@@ -13,14 +13,17 @@ void adccb(ADCDriver *adcp, adcsample_t *buffer, size_t n){
 
         sum_adc_lamp=0;
         sum_adc_batt=0;
+        sum_adc_usb=0;
 
         for(i=0;i<ADC_GRP1_BUF_DEPTH;i++){
             sum_adc_lamp=sum_adc_lamp+samples[0+(i*ADC_GRP1_NUM_CHANNELS)];
             sum_adc_batt=sum_adc_batt+samples[1+(i*ADC_GRP1_NUM_CHANNELS)];
+            sum_adc_usb=sum_adc_usb+samples[2+(i*ADC_GRP1_NUM_CHANNELS)];
         }
 
         adc_lamp=sum_adc_lamp/ADC_GRP1_BUF_DEPTH;
         adc_batt=sum_adc_batt/ADC_GRP1_BUF_DEPTH;
+        adc_usb=sum_adc_usb/ADC_GRP1_BUF_DEPTH;
     }
 }
 
@@ -32,16 +35,17 @@ static const ADCConversionGroup adcgrpcfg = {
     /* HW dependent part.*/
     0,
     0,
-    ADC_LAMP_SMPR(ADC_SAMPLE_239P5) |  ADC_BATT_SMPR(ADC_SAMPLE_239P5),
+    ADC_LAMP_SMPR(ADC_SAMPLE_239P5) |  ADC_BATT_SMPR(ADC_SAMPLE_239P5) | ADC_USB_SMPR(ADC_SAMPLE_239P5) ,
     0,
     ADC_SQR1_NUM_CH(ADC_GRP1_NUM_CHANNELS),
     0,
-    ADC_SQR3_SQ1_N(ADC_LAMP_CHANNEL) | ADC_SQR3_SQ2_N(ADC_BATT_CHANNEL)
+    ADC_SQR3_SQ1_N(ADC_LAMP_CHANNEL) | ADC_SQR3_SQ2_N(ADC_BATT_CHANNEL) | ADC_SQR3_SQ3_N(ADC_USB_CHANNEL)
 };
 
 void analog_init(void){
     palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_INPUT_ANALOG);
     palSetPadMode(GPIOA,ADC_BATT_N,PAL_MODE_INPUT_ANALOG);
+    palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_INPUT_ANALOG);
     adcStart(&ADCD1, NULL);
 }
 
@@ -56,6 +60,7 @@ void analog_deinit(void){
     adcStop(&ADCD1);
     palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_RESET);
     palSetPadMode(GPIOA,ADC_BATT_N,PAL_MODE_RESET);
+    palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_RESET);
 }
 
 void analog_print(void){
@@ -78,6 +83,20 @@ uint8_t chk_lamp(void){
     delay(analog_tunda);
 
     if(adc_lamp>=MIN_ADC_LAMP){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+uint8_t chk_usb(void){
+    adcStopConversion(&ADCD1);
+    delay(analog_tunda);
+    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+    delay(analog_tunda);
+
+    if(adc_usb>=MIN_ADC_USB){
         return 1;
     }
     else{

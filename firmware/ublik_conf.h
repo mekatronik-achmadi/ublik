@@ -4,11 +4,12 @@
 #define USE_COMMS 0
 
 #define USE_SLEEP 1
-#define RTC_ALARMPERIOD 5
+#define RTC_ALARMPERIOD 30
 
 #define USE_STANDBY 1
 
 #define MIN_ADC_LAMP 100
+#define MIN_ADC_USB 100
 
 #define LVL_BATT_1 100
 #define LVL_BATT_2 100

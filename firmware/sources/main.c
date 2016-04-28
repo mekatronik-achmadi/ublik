@@ -41,6 +41,18 @@ int main(void) {
     }
 
     /*
+     * Check usb
+     */
+    Usb_ON();
+    if(chk_usb()==1){
+        Usb_ON();
+        led_ind_usb();
+    }
+    else{
+        Usb_OFF();
+    }
+
+    /*
      *Check pv
      */
     if(chk_pv()==1){
@@ -53,6 +65,10 @@ int main(void) {
         analog_print();
         led_ind_test();
 #endif
+        if((chk_usb()==1)&&(chk_batt()==1)){
+            Usb_OFF();
+        }
+
         if((chk_lamp()==1)&&(chk_batt()==1)){
             Lamp_OFF();
         }
@@ -81,6 +97,16 @@ int main(void) {
             sleep_init();
         }
 
+
+        if(chk_usb()==1){
+            Usb_ON();
+            led_ind_usb();
+        }
+        else{
+            Usb_OFF();
+        }
+
+
         if(chk_lamp()==1){
             Lamp_ON();
             led_ind_lamp();
@@ -88,6 +114,7 @@ int main(void) {
         else{
             Lamp_OFF();
         }
+
 
         if(chk_pv()==1){
             led_ind_pv();

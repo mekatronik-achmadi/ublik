@@ -9,15 +9,20 @@
 
 #define chk_pv_pin 0 //A
 #define chk_lamp_pin 3 //A
+#define chk_usb_pin 4 //A
 
 #define con_lamp_pin 12 //B
+#define con_usb_pin 13 //B
 #define con_pv_pin 14 //B
 
 #define wkup_pin chk_pv_pin
 
-#define led_pv_pin 9 //B
 #define led_lamp_pin 8 //B
+#define led_usb_pin 7 //B
+#define led_pv_pin 9 //B
+
 #define led_ind_pin 7 //B
+
 #define led_batt4_pin 6 //B
 #define led_batt3_pin 5 //B
 #define led_batt2_pin 4 //B
@@ -27,7 +32,10 @@
 #define Ind_OFF() palClearPad(GPIOB, led_ind_pin)
 
 #define Lamp_ON() palSetPad(GPIOB, con_lamp_pin)
-#define Lamp_OFF() palClearPad(GPIOB, con_lamp_pin);
+#define Lamp_OFF() palClearPad(GPIOB, con_lamp_pin)
+
+#define Usb_ON() palSetPad(GPIOB, con_usb_pin)
+#define Usb_OFF() palClearPad(GPIOB, con_usb_pin)
 
 #define PV_OFF() palSetPad(GPIOB,con_pv_pin)
 #define PV_ON() palClearPad(GPIOB,con_pv_pin)
@@ -44,6 +52,7 @@ void pin_deinit(void);
 void led_ind_test(void);
 void led_ind_wkupslp(void);
 void led_ind_lamp(void);
+void led_ind_usb(void);
 void led_ind_pv(void);
 void led_ind_batt(void);
 
