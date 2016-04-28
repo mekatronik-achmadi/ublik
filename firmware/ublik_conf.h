@@ -1,12 +1,12 @@
 #ifndef UBLIK_CONF_H
 #define UBLIK_CONF_H
 
-#define USE_COMMS 0
+#define USE_COMMS FALSE
 
-#define USE_SLEEP 1
+#define USE_SLEEP TRUE
 #define RTC_ALARMPERIOD 30
 
-#define USE_STANDBY 1
+#define USE_STANDBY TRUE
 
 #define MIN_ADC_LAMP 100
 #define MIN_ADC_USB 100
