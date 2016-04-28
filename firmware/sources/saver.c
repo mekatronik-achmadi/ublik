@@ -1,7 +1,6 @@
 #include "inklusi.h"
 
 static binary_semaphore_t alarm_sem;
-static RTCDateTime timespec;
 static RTCAlarm alarmspec;
 static uint32_t tv_sec;
 
@@ -68,7 +67,6 @@ static void rtc_cb(RTCDriver *rtcp, rtcevent_t event) {
 void saver_init(void){
     chBSemObjectInit(&alarm_sem, TRUE);
     rtcSTM32SetSec(&RTCD1,0);
-    rtcGetTime(&RTCD1, &timespec);
 }
 
 void alarm_init(void){
