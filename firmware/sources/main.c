@@ -64,7 +64,7 @@ int main(void) {
     while (true){
 
 #if USE_COMMS
-        analog_print();
+        data_print();
         led_ind_test();
 #endif
         if((chk_usb()==1)&&(chk_batt()==1)){
@@ -82,7 +82,7 @@ int main(void) {
             PV_OFF();
         }
 
-        if( (chk_lamp() != 1) && (chk_pv() !=1) ){
+        if( (chk_lamp() != 1) && (chk_pv() !=1) && (chk_usb() !=1) ){
 #if USE_STANDBY
             pin_deinit();
             analog_deinit();
@@ -95,8 +95,10 @@ int main(void) {
 #endif
         }
         else{
+#if USE_SLEEP
             alarm_init();
             sleep_init();
+#endif
         }
 
 

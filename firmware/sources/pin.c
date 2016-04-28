@@ -22,7 +22,7 @@ void con_pin_init(void){
 }
 
 void chk_pv_pin_init(void){
-    palSetPadMode(GPIOA, wkup_pin, PAL_MODE_INPUT_PULLDOWN);
+    palSetPadMode(GPIOA, chk_pv_pin, PAL_MODE_INPUT_PULLDOWN);
 }
 
 void pin_init(void){

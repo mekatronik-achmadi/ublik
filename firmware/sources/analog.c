@@ -63,19 +63,6 @@ void analog_deinit(void){
     palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_RESET);
 }
 
-void analog_print(void){
-
-    adcStopConversion(&ADCD1);
-    delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-    delay(analog_tunda);
-
-#if USE_COMMS
-    chprintf(CHP,"a-lamp = %4d | a-batt = %4d \r\n",adc_lamp,adc_batt);
-#endif
-
-}
-
 uint8_t chk_lamp(void){
     adcStopConversion(&ADCD1);
     delay(analog_tunda);
@@ -129,6 +116,21 @@ uint8_t chk_batt(void){
     }
 
     return lvl;
+}
+
+void data_print(void){
+
+    adcStopConversion(&ADCD1);
+    delay(analog_tunda);
+    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+    delay(analog_tunda);
+    
+    uint8_t pv_stt;
+    if(palReadPad(GPIOA, chk_pv_pin)==PAL_HIGH){pv_stt=1;}
+    else{pv_stt=0;}
+    
+    chprintf(CHP,"a-lamp = %4d | a-usb = %4d | a-batt = %4d | s-pv = %1d \r\n",adc_lamp,adc_usb,adc_batt,pv_stt);
+
 }
 
 

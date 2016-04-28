@@ -21,7 +21,8 @@
 void analog_init(void);
 void analog_deinit(void);
 void analog_read(void);
-void analog_print(void);
+
+void data_print(void);
 
 uint8_t chk_lamp(void);
 uint8_t chk_usb(void);

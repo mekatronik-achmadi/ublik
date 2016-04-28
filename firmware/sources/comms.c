@@ -11,3 +11,4 @@ void comms_deinit(void){
    palSetPadMode(GPIOA, 9, PAL_MODE_RESET);
    palSetPadMode(GPIOA, 10, PAL_MODE_RESET);
 }
+

@@ -4,7 +4,7 @@
 #define USE_COMMS FALSE
 
 #define USE_SLEEP TRUE
-#define RTC_ALARMPERIOD 30
+#define RTC_ALARMPERIOD 5
 
 #define USE_STANDBY TRUE
 
