@@ -9,7 +9,7 @@
 #define USE_STANDBY TRUE
 
 #define MIN_ADC_LAMP 100
-#define MIN_ADC_USB 100
+#define MIN_ADC_USB 4095
 
 #define LVL_BATT_1 100
 #define LVL_BATT_2 100

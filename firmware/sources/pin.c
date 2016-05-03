@@ -52,11 +52,11 @@ void pin_deinit(void){
 uint8_t chk_pv(void){
     uint8_t result;
 
-    if(!palReadPad(GPIOA, wkup_pin)){
-        result=0;
+    if(palReadPad(GPIOA, wkup_pin)==PAL_HIGH){
+        result=1;
     }
     else{
-        result=1;
+        result=0;
     }
 
     return result;
@@ -100,22 +100,23 @@ void led_ind_pv(void){
 void led_ind_batt(void){
     uint8_t stt;
 
-    stt=chk_batt();
+//    stt=chk_batt();
+    stt=4;
 
     if(stt==0){
-        palClearPad(GPIOB, led_batt1_pin);
+        palSetPad(GPIOB, led_batt1_pin);
     }
     else if(stt==1){
-        palClearPad(GPIOB, led_batt1_pin);
+        palSetPad(GPIOB, led_batt1_pin);
     }
     else if(stt==2){
-        palClearPad(GPIOB, led_batt2_pin);
+        palSetPad(GPIOB, led_batt2_pin);
     }
     else if(stt==3){
         palClearPad(GPIOB, led_batt3_pin);
     }
     else if(stt==4){
-        palClearPad(GPIOB, led_batt4_pin);
+        palSetPad(GPIOB, led_batt4_pin);
     }
 
     delay(ind_tunda);

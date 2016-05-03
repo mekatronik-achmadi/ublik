@@ -87,9 +87,9 @@ int main(void) {
             pin_deinit();
             analog_deinit();
 
-#if USE_COMMS
+    #if USE_COMMS
             comms_deinit();
-#endif
+    #endif
 
             standby_init();
 #endif
