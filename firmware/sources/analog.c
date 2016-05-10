@@ -49,12 +49,6 @@ void analog_init(void){
     adcStart(&ADCD1, NULL);
 }
 
-void analog_read(void){
-    delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-    delay(analog_tunda);
-}
-
 void analog_deinit(void){
     adcStopConversion(&ADCD1);
     adcStop(&ADCD1);
@@ -64,9 +58,10 @@ void analog_deinit(void){
 }
 
 uint8_t chk_lamp(void){
-    adcStopConversion(&ADCD1);
-    delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+//    adcStopConversion(&ADCD1);
+//    delay(analog_tunda);
+//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+    adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
 
     if(adc_lamp>=MIN_ADC_LAMP){
@@ -78,10 +73,12 @@ uint8_t chk_lamp(void){
 }
 
 uint8_t chk_usb(void){
-    adcStopConversion(&ADCD1);
+//    adcStopConversion(&ADCD1);
+//    delay(analog_tunda);
+//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+    adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
-    delay(analog_tunda);
+
 
     if(adc_usb>=MIN_ADC_USB){
         return 1;
@@ -92,9 +89,10 @@ uint8_t chk_usb(void){
 }
 
 uint8_t chk_batt(void){
-    adcStopConversion(&ADCD1);
-    delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+//    adcStopConversion(&ADCD1);
+//    delay(analog_tunda);
+//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+    adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
 
     uint8_t lvl;
@@ -120,13 +118,15 @@ uint8_t chk_batt(void){
 
 void data_print(void){
 
-    adcStopConversion(&ADCD1);
-    delay(analog_tunda);
-    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+//    adcStopConversion(&ADCD1);
+//    delay(analog_tunda);
+//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
+
+    adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
     
     uint8_t pv_stt;
-    if(palReadPad(GPIOA, chk_pv_pin)==PAL_HIGH){pv_stt=1;}
+    if(chk_pv()==1){pv_stt=1;}
     else{pv_stt=0;}
     
     chprintf(CHP,"a-lamp = %4d | a-usb = %4d | a-batt = %4d | s-pv = %1d \r\n",adc_lamp,adc_usb,adc_batt,pv_stt);

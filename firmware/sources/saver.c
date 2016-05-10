@@ -70,12 +70,19 @@ void saver_init(void){
 }
 
 void alarm_init(void){
-    chBSemWaitTimeout(&alarm_sem, S2ST(RTC_ALARMPERIOD + 1));
+    chBSemWaitTimeout(&alarm_sem, S2ST(SAVER_PERIOD + 1));
     rtcSTM32GetSecMsec(&RTCD1, &tv_sec, NULL);
-    alarmspec.tv_sec = tv_sec + RTC_ALARMPERIOD;
+    alarmspec.tv_sec = tv_sec + SAVER_PERIOD;
     rtcSetAlarm(&RTCD1, 0, &alarmspec);
     rtcSetCallback(&RTCD1, rtc_cb);
     extStart(&EXTD1, &extcfg);
+}
+
+void alarm_deinit(void){
+    extStop(&EXTD1);
+    rtcSetCallback(&RTCD1, NULL);
+    rtcSetAlarm(&RTCD1, 0, NULL);
+    chBSemObjectInit(&alarm_sem, FALSE);
 }
 
 void sleep_init(void){

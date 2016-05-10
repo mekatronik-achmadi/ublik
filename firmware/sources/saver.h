@@ -15,8 +15,11 @@ void wkup_pin_set(FunctionalState NewState);
 void pwr_flag_clear(uint32_t PWR_FLAG);
 
 void saver_init(void);
-void standby_init(void);
+
 void alarm_init(void);
+void alarm_deinit(void);
+
+void standby_init(void);
 void sleep_init(void);
 
 

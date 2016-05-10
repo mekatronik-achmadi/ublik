@@ -20,7 +20,6 @@
 
 void analog_init(void);
 void analog_deinit(void);
-void analog_read(void);
 
 void data_print(void);
 

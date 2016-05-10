@@ -12,8 +12,7 @@ int main(void) {
     pin_init();
     analog_init();
 
-
-#if USE_SLEEP
+#if USE_SAVER
     saver_init();
 #endif
 
@@ -61,6 +60,11 @@ int main(void) {
         led_ind_pv();
     }
 
+#if USE_COMMS
+        chprintf(CHP,"System Initiated.\n\r");
+        delay(analog_tunda);
+#endif
+
     while (true){
 
 #if USE_COMMS
@@ -82,25 +86,34 @@ int main(void) {
             PV_OFF();
         }
 
-        if( (chk_lamp() != 1) && (chk_pv() !=1) && (chk_usb() !=1) ){
-#if USE_STANDBY
+        if( (chk_lamp() == 0) && (chk_pv() !=1) && (chk_usb() !=1) ){
+#if USE_SAVER
             pin_deinit();
             analog_deinit();
-
     #if USE_COMMS
+            chprintf(CHP,"Going to Die. Bye.\n\r ");
+            delay(analog_tunda);
             comms_deinit();
     #endif
-
+            alarm_deinit();
             standby_init();
 #endif
         }
         else{
-#if USE_SLEEP
+#if USE_SAVER
+    #if USE_COMMS
+            chprintf(CHP,"Going to Sleep. See you.\n\r");
+            delay(analog_tunda);
+    #endif
             alarm_init();
             sleep_init();
 #endif
         }
 
+#if USE_COMMS
+        chprintf(CHP,"Waking up from sleep.\n\r");
+        delay(analog_tunda);
+#endif
 
         if(chk_usb()==1){
             Usb_ON();
