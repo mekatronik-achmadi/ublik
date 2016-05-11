@@ -1,9 +1,5 @@
 #include "inklusi.h"
 
-void delay(__IO uint32_t nCount){
-  for(; nCount != 0; nCount--);
-}
-
 void led_pin_init(void){
     palSetPadMode(GPIOB, led_pv_pin, PAL_MODE_OUTPUT_PUSHPULL);
     palSetPadMode(GPIOB, led_usb_pin, PAL_MODE_OUTPUT_PUSHPULL);
@@ -43,10 +39,9 @@ void pin_deinit(void){
     palSetPadMode(GPIOB, led_batt2_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, led_batt1_pin, PAL_MODE_RESET);
 
+    palSetPadMode(GPIOB, con_usb_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, con_lamp_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, con_pv_pin, PAL_MODE_RESET);
-
-    palSetPadMode(GPIOA, wkup_pin, PAL_MODE_RESET);
 }
 
 uint8_t chk_pv(void){
@@ -60,29 +55,6 @@ uint8_t chk_pv(void){
     }
 
     return result;
-}
-
-void led_blink(GPIO_TypeDef *port, uint16_t pin, uint32_t ntunda){
-    palSetPad(port, pin);
-    delay(ntunda);
-    palClearPad(port, pin);
-    delay(ntunda);
-}
-
-void led_ind_test(void){
-    led_blink(GPIOB,led_ind_pin,ind_tunda);
-}
-
-void led_ind_lamp(void){
-    led_blink(GPIOB,led_lamp_pin,ind_tunda);
-}
-
-void led_ind_usb(void){
-    led_blink(GPIOB,led_usb_pin,ind_tunda);
-}
-
-void led_ind_pv(void){
-    led_blink(GPIOB,led_pv_pin,ind_tunda);
 }
 
 void led_ind_batt(void){
@@ -107,11 +79,6 @@ void led_ind_batt(void){
         palSetPad(GPIOB, led_batt4_pin);
     }
 
-    delay(ind_tunda);
-    palClearPad(GPIOB, led_batt4_pin);
-    palClearPad(GPIOB, led_batt3_pin);
-    palClearPad(GPIOB, led_batt2_pin);
-    palClearPad(GPIOB, led_batt1_pin);
 }
 
 void con_pin_set(GPIO_TypeDef *port, uint16_t pin, uint8_t status){
@@ -121,4 +88,17 @@ void con_pin_set(GPIO_TypeDef *port, uint16_t pin, uint8_t status){
     else if(status==CON_DISABLE){
         palClearPad(port,pin);
     }
+}
+
+void led_ind_off_all(systime_t time){
+    delay_ms(time);
+
+    palClearPad(GPIOB, led_pv_pin);
+    palClearPad(GPIOB, led_usb_pin);
+    palClearPad(GPIOB, led_lamp_pin);
+    palClearPad(GPIOB, led_ind_pin);
+    palClearPad(GPIOB, led_batt4_pin);
+    palClearPad(GPIOB, led_batt3_pin);
+    palClearPad(GPIOB, led_batt2_pin);
+    palClearPad(GPIOB, led_batt1_pin);
 }

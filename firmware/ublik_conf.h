@@ -1,11 +1,12 @@
 #ifndef UBLIK_CONF_H
 #define UBLIK_CONF_H
 
-#define con_tunda 0xAFFF
-#define ind_tunda 0xAFFFF
-#define analog_tunda 0xAFFFF
+#define ind_tunda 500
+#define con_tunda 100
+#define proc_tunda 100
+#define analog_tunda 100
 
-#define USE_COMMS FALSE
+#define USE_COMMS TRUE
 
 #define USE_SAVER TRUE
 #define SAVER_SHORT_PERIOD 1

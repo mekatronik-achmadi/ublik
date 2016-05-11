@@ -2,6 +2,10 @@
 
 int main(void) {
 
+/*
+ * Initializing system
+ */
+
   halInit();
   chSysInit();
 
@@ -15,23 +19,89 @@ int main(void) {
 #if USE_COMMS
   comms_init();
   chprintf(CHP,"System Initiated.\n\r");
-  delay(ind_tunda);
+  delay_ms(ind_tunda);
 #endif
 
   led_ind_test();
 
-  alarm_init(1);
+/*
+* Perform Led Indicating
+*/
+
+  led_ind_batt();
+
+  con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
+  delay_ms(con_tunda);
+  if(chk_lamp()==1){
+      con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
+      led_ind_lamp();
+  }
+  else{
+      con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
+  }
+
+  con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+  delay_ms(con_tunda);
+  if(chk_usb()==1){
+      con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+      led_ind_usb();
+  }
+  else{
+      con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
+  }
+
+  if(chk_pv()==1){
+      led_ind_pv();
+  }
+
+  led_ind_off_all(ind_tunda);
+
+/*
+* Battere level control
+*/
+
+  if((chk_pv()==1)&&(chk_batt()==4)){
+      con_pv_off();
+  }
+
+  if((chk_usb()==1)&&(chk_batt()==1)){
+      con_pin_set(GPIOB, con_usb_pin, DISABLE);
+  }
+
+  if((chk_lamp()==1)&&(chk_batt()==1)){
+      con_pin_set(GPIOB, con_lamp_pin, DISABLE);
+  }
+
+/*
+* Saver routine
+*/
+  analog_deinit();
+
+  if( (chk_lamp()==0) && (chk_pv()==0 ) && (chk_usb()==0 ) ){
+#if USE_SAVER
+          pin_deinit();
+  #if USE_COMMS
+          chprintf(CHP,"Going to long Sleep.\n\r ");
+          delay_ms(ind_tunda);
+          comms_deinit();
+  #endif
+          alarm_init(SAVER_LONG_PERIOD);
+#endif
+  }
+  else{
+#if USE_SAVER
+    #if USE_COMMS
+        chprintf(CHP,"Going to short Sleep.\n\r");
+        delay_ms(ind_tunda);
+        comms_deinit();
+    #endif
+        alarm_init(SAVER_SHORT_PERIOD);
+#endif
+  }
 
   while (true){
-    chThdSleepSeconds(1);
-
-    /* going to anabiosis*/
-    chSysLock();
-    wkup_pin_set(ENABLE);
-    PWR->CR |= PWR_CR_CWUF | PWR_CR_CSBF;
-    PWR->CR |= PWR_CR_PDDS | PWR_CR_LPDS;
-    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-    __WFI();
+    standby_start();
   }
+
   return 0;
 }

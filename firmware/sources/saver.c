@@ -18,15 +18,23 @@ void alarm_init(uint32_t alarm_time){
     rtcSetAlarm(&RTCD1, 0, &alarmspec);
 }
 
-void standby_init(void){
+void standby_start(void){
+
+    delay_ms(proc_tunda);
+
     chSysLock();
+
     wkup_pin_set(ENABLE);
     PWR->CR |= PWR_CR_CWUF;
     PWR->CR |= PWR_CR_CSBF;
     PWR->CR |= PWR_CR_LPDS;
     PWR->CR |= PWR_CR_PDDS;
+
     SCB->SCR |= SCB_SCR_SLEEPDEEP;
+//    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+
     __WFI();
+
     chSysUnlock();
 }
 

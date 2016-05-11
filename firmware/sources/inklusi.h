@@ -24,5 +24,8 @@
 #include "comms.h"
 #include "analog.h"
 
+#define delay_s chThdSleepSeconds
+#define delay_ms chThdSleepMilliseconds
+#define delay_us chThdSleepMicroseconds
 
 #endif // INKLUSI_H
