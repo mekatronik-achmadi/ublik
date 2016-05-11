@@ -62,39 +62,27 @@ uint8_t chk_pv(void){
     return result;
 }
 
-void led_ind_test(void){
-    Ind_ON();
-    delay(ind_tunda);
-    Ind_OFF();
-    delay(ind_tunda);
+void led_blink(GPIO_TypeDef *port, uint16_t pin, uint32_t ntunda){
+    palSetPad(port, pin);
+    delay(ntunda);
+    palClearPad(port, pin);
+    delay(ntunda);
 }
 
-void led_ind_wkupslp(void){
-    Ind_ON();
-    delay(ind_sleep);
-    Ind_OFF();
-    delay(ind_sleep);
+void led_ind_test(void){
+    led_blink(GPIOB,led_ind_pin,ind_tunda);
 }
 
 void led_ind_lamp(void){
-    palSetPad(GPIOB,led_lamp_pin);
-    delay(ind_tunda);
-    palClearPad(GPIOB,led_lamp_pin);
-    delay(ind_tunda);
+    led_blink(GPIOB,led_lamp_pin,ind_tunda);
 }
 
 void led_ind_usb(void){
-    palSetPad(GPIOB,led_usb_pin);
-    delay(ind_tunda);
-    palClearPad(GPIOB,led_usb_pin);
-    delay(ind_tunda);
+    led_blink(GPIOB,led_usb_pin,ind_tunda);
 }
 
 void led_ind_pv(void){
-    palSetPad(GPIOB,led_pv_pin);
-    delay(ind_tunda);
-    palClearPad(GPIOB,led_pv_pin);
-    delay(ind_tunda);
+    led_blink(GPIOB,led_pv_pin,ind_tunda);
 }
 
 void led_ind_batt(void){
@@ -124,4 +112,13 @@ void led_ind_batt(void){
     palClearPad(GPIOB, led_batt3_pin);
     palClearPad(GPIOB, led_batt2_pin);
     palClearPad(GPIOB, led_batt1_pin);
+}
+
+void con_pin_set(GPIO_TypeDef *port, uint16_t pin, uint8_t status){
+    if(status==CON_ENABLE){
+        palSetPad(port,pin);
+    }
+    else if(status==CON_DISABLE){
+        palClearPad(port,pin);
+    }
 }

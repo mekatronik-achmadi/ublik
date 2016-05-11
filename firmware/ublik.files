@@ -1,4 +1,3 @@
-ublik_conf.h
 sources/analog.c
 sources/analog.h
 sources/board.c
@@ -8,9 +7,10 @@ sources/comms.c
 sources/comms.h
 sources/halconf.h
 sources/inklusi.h
-sources/main.c
 sources/mcuconf.h
 sources/pin.c
 sources/pin.h
 sources/saver.c
 sources/saver.h
+main.c
+ublik_conf.h

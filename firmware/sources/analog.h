@@ -1,8 +1,6 @@
 #ifndef ANALOG_H
 #define ANALOG_H
 
-#define analog_tunda 0xAFFFF
-
 #define ADC_GRP1_NUM_CHANNELS   3
 #define ADC_GRP1_BUF_DEPTH      100
 

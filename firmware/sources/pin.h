@@ -3,10 +3,8 @@
 
 #define __IO volatile
 
-#define ind_sleep 0xAFFF
-#define ind_tunda 0xAFFFF
-#define con_tunda 0xAFFF
-#define process_tunda 0xAFFFF
+#define CON_ENABLE 1
+#define CON_DISABLE 0
 
 #define chk_pv_pin 0 //A
 #define chk_lamp_pin 3 //A
@@ -29,18 +27,6 @@
 #define led_batt2_pin 4 //B
 #define led_batt1_pin 3 //B
 
-#define Ind_ON() palSetPad(GPIOB, led_ind_pin)
-#define Ind_OFF() palClearPad(GPIOB, led_ind_pin)
-
-#define Lamp_ON() palSetPad(GPIOB, con_lamp_pin)
-#define Lamp_OFF() palClearPad(GPIOB, con_lamp_pin)
-
-#define Usb_ON() palSetPad(GPIOB, con_usb_pin)
-#define Usb_OFF() palClearPad(GPIOB, con_usb_pin)
-
-#define PV_OFF() palSetPad(GPIOB,con_pv_pin)
-#define PV_ON() palClearPad(GPIOB,con_pv_pin)
-
 void delay(__IO uint32_t nCount);
 
 void led_pin_init(void);
@@ -50,12 +36,15 @@ void chk_pv_pin_init(void);
 void pin_init(void);
 void pin_deinit(void);
 
+void led_blink(GPIO_TypeDef * port, uint16_t pin, uint32_t tunda);
+
 void led_ind_test(void);
-void led_ind_wkupslp(void);
 void led_ind_lamp(void);
 void led_ind_usb(void);
 void led_ind_pv(void);
 void led_ind_batt(void);
+
+void con_pin_set(GPIO_TypeDef * port, uint16_t pin, uint8_t status);
 
 uint8_t chk_pv(void);
 

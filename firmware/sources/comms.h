@@ -3,8 +3,6 @@
 
 #define CHP (BaseSequentialStream *)&SD1
 
-#define SHELL_WA_SIZE   THD_WA_SIZE(2048)
-
 void comms_init(void);
 void comms_deinit(void);
 

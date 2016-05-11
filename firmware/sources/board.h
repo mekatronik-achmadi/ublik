@@ -24,8 +24,8 @@
 /*
  * Board identifier.
  */
-#define BOARD_COBA
-#define BOARD_NAME              "COBA"
+#define BOARD_UBLIK
+#define BOARD_NAME              "UBLIK"
 
 /*
  * Board frequencies.

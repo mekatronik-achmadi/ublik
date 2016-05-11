@@ -58,9 +58,6 @@ void analog_deinit(void){
 }
 
 uint8_t chk_lamp(void){
-//    adcStopConversion(&ADCD1);
-//    delay(analog_tunda);
-//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
 
@@ -73,9 +70,6 @@ uint8_t chk_lamp(void){
 }
 
 uint8_t chk_usb(void){
-//    adcStopConversion(&ADCD1);
-//    delay(analog_tunda);
-//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
 
@@ -89,9 +83,6 @@ uint8_t chk_usb(void){
 }
 
 uint8_t chk_batt(void){
-//    adcStopConversion(&ADCD1);
-//    delay(analog_tunda);
-//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
 
@@ -117,10 +108,6 @@ uint8_t chk_batt(void){
 }
 
 void data_print(void){
-
-//    adcStopConversion(&ADCD1);
-//    delay(analog_tunda);
-//    adcStartConversion(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
 
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay(analog_tunda);
