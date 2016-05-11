@@ -1,5 +1,7 @@
 #include "inklusi.h"
 
+uint32_t n_saver;
+
 int main(void) {
 
 /*
@@ -81,23 +83,25 @@ int main(void) {
 #if USE_SAVER
           pin_deinit();
   #if USE_COMMS
-          chprintf(CHP,"Going to long Sleep.\n\r ");
+          chprintf(CHP,"Going to Hibernate.\n\r ");
           delay_ms(ind_tunda);
           comms_deinit();
   #endif
-          alarm_init(SAVER_LONG_PERIOD);
+          n_saver = HIBERNATE_PERIOD;
 #endif
   }
   else{
 #if USE_SAVER
     #if USE_COMMS
-        chprintf(CHP,"Going to short Sleep.\n\r");
+        chprintf(CHP,"Going to Sleep.\n\r");
         delay_ms(ind_tunda);
         comms_deinit();
     #endif
-        alarm_init(SAVER_SHORT_PERIOD);
+        n_saver = SLEEP_PERIOD;
 #endif
   }
+
+  alarm_init(n_saver);
 
   while (true){
     standby_start();

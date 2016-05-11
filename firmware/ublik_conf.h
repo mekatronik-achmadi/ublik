@@ -6,11 +6,11 @@
 #define proc_tunda 100
 #define analog_tunda 100
 
-#define USE_COMMS TRUE
+#define USE_COMMS FALSE
 
 #define USE_SAVER TRUE
-#define SAVER_SHORT_PERIOD 1
-#define SAVER_LONG_PERIOD 1
+#define SLEEP_PERIOD 1
+#define HIBERNATE_PERIOD 1
 
 #define MIN_ADC_LAMP 200
 #define MIN_ADC_USB 4095

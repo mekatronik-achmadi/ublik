@@ -7,8 +7,8 @@
 #define EWUP_BitNumber  0x08
 #define CSR_EWUP_BB     (PERIPH_BB_BASE + (CSR_OFFSET * 32) + (EWUP_BitNumber * 4))
 
-void wkup_pin_set(FunctionalState NewState);
 void saver_init(void);
+void wkup_pin_set(FunctionalState NewState);
 void alarm_init(uint32_t alarm_time);
 void standby_start(void);
 

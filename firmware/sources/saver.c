@@ -1,5 +1,9 @@
 #include "inklusi.h"
 
+static RTCDateTime timespec;
+static RTCAlarm alarmspec;
+static uint32_t tv_sec;
+
 void wkup_pin_set(FunctionalState NewState)
 {
   *(__IO uint32_t *) CSR_EWUP_BB = (uint32_t)NewState;
@@ -7,12 +11,10 @@ void wkup_pin_set(FunctionalState NewState)
 
 void saver_init(void){
     rtcSTM32SetSec(&RTCD1,0);
+    rtcGetTime(&RTCD1, &timespec);
 }
 
 void alarm_init(uint32_t alarm_time){
-    RTCAlarm alarmspec;
-    uint32_t tv_sec;
-
     rtcSTM32GetSecMsec(&RTCD1, &tv_sec, NULL);
     alarmspec.tv_sec = tv_sec + alarm_time;
     rtcSetAlarm(&RTCD1, 0, &alarmspec);
