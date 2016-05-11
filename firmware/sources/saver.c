@@ -27,6 +27,7 @@ void standby_start(void){
     chSysLock();
 
     wkup_pin_set(ENABLE);
+    
     PWR->CR |= PWR_CR_CWUF;
     PWR->CR |= PWR_CR_CSBF;
     PWR->CR |= PWR_CR_LPDS;
