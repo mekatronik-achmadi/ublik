@@ -4,6 +4,9 @@ void led_pin_init(void){
     palSetPadMode(GPIOB, led_pv_pin, PAL_MODE_OUTPUT_PUSHPULL);
     palSetPadMode(GPIOB, led_usb_pin, PAL_MODE_OUTPUT_PUSHPULL);
     palSetPadMode(GPIOB, led_lamp_pin, PAL_MODE_OUTPUT_PUSHPULL);
+    
+    palSetPadMode(GPIOB, led_ind_pin, PAL_MODE_OUTPUT_PUSHPULL);
+    
     palSetPadMode(GPIOB, led_batt4_pin, PAL_MODE_OUTPUT_PUSHPULL);
     palSetPadMode(GPIOB, led_batt3_pin, PAL_MODE_OUTPUT_PUSHPULL);
     palSetPadMode(GPIOB, led_batt2_pin, PAL_MODE_OUTPUT_PUSHPULL);
@@ -32,6 +35,9 @@ void pin_deinit(void){
     palSetPadMode(GPIOB, led_pv_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, led_usb_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, led_lamp_pin, PAL_MODE_RESET);
+    
+    palSetPadMode(GPIOB, led_ind_pin, PAL_MODE_RESET);
+    
     palSetPadMode(GPIOB, led_batt4_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, led_batt3_pin, PAL_MODE_RESET);
     palSetPadMode(GPIOB, led_batt2_pin, PAL_MODE_RESET);
@@ -94,6 +100,9 @@ void led_ind_off_all(systime_t time){
     palClearPad(GPIOB, led_pv_pin);
     palClearPad(GPIOB, led_usb_pin);
     palClearPad(GPIOB, led_lamp_pin);
+    
+    palClearPad(GPIOB, led_ind_pin);
+    
     palClearPad(GPIOB, led_batt4_pin);
     palClearPad(GPIOB, led_batt3_pin);
     palClearPad(GPIOB, led_batt2_pin);
