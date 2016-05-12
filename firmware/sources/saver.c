@@ -12,24 +12,24 @@ static void extcbwkup(EXTDriver *extp, expchannel_t channel) {
 
 static const EXTConfig extcfg = {
   {
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
-    {EXT_CH_MODE_DISABLED, NULL},
     {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcbwkup},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_RISING_EDGE | EXT_CH_MODE_AUTOSTART, extcbwkup}
   }
 };
 
@@ -80,7 +80,7 @@ void saver_init(void){
     rtcGetTime(&RTCD1, &timespec);
 }
 
-void sleep_start(uint32_t alarm_time){
+void saver_start(uint32_t alarm_time){
 
     chBSemWaitTimeout(&alarm_sem, S2ST(alarm_time + 1));
 
@@ -99,27 +99,5 @@ void sleep_start(uint32_t alarm_time){
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
     __WFI();
-}
-
-void hibernate_start(uint32_t alarm_time){
-
-    rtcSTM32GetSecMsec(&RTCD1, &tv_sec, NULL);
-    alarmspec.tv_sec = tv_sec + alarm_time;
-    rtcSetAlarm(&RTCD1, 0, &alarmspec);
-
-    wkup_pin_set(ENABLE);
-
-    chSysLock();
-    
-    PWR->CR |= PWR_CR_CWUF;
-    PWR->CR |= PWR_CR_CSBF;
-    PWR->CR |= PWR_CR_LPDS;
-    PWR->CR |= PWR_CR_PDDS;
-
-    SCB->SCR |= SCB_SCR_SLEEPDEEP;
-
-    __WFI();
-
-    chSysUnlock();
 }
 

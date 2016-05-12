@@ -17,7 +17,6 @@ void ublik_init(void){
     delay_ms(ind_tunda);
 #endif
 
-    led_ind_test();
 }
 
 void ublik_chk_ind(void){
@@ -66,21 +65,18 @@ void ublik_batt(void){
 
 void ublik_saver(void){
     if(HIBERNATE_CONDITION){
-            pin_deinit();
-            analog_deinit();
     #if USE_COMMS
-            chprintf(CHP,"Going to Hibernate.\n\r ");
-            delay_ms(ind_tunda);
-            comms_deinit();
+        chprintf(CHP,"Going to Hibernate.\n\r ");
+        delay_ms(ind_tunda);
     #endif
-            hibernate_start(HIBERNATE_PERIOD);
+        saver_start(HIBERNATE_PERIOD);
     }
     else{
       #if USE_COMMS
-          chprintf(CHP,"Going to Sleep.\n\r");
-          delay_ms(ind_tunda);
+        chprintf(CHP,"Going to Sleep.\n\r");
+        delay_ms(ind_tunda);
       #endif
-          sleep_start(SLEEP_PERIOD);
+        saver_start(SLEEP_PERIOD);
     }
 
 }

@@ -11,12 +11,10 @@
 #define PWR_Regulator_LowPower  ((uint32_t)0x00000001)
 #define PWR_FLAG_WU             ((uint32_t)0x00000001)
 
-void saver_init(void);
-
 void wkup_pin_set(FunctionalState NewState);
 void pwr_flag_clear(uint32_t PWR_FLAG);
 
-void sleep_start(uint32_t alarm_time);
-void hibernate_start(uint32_t alarm_time);
+void saver_init(void);
+void saver_start(uint32_t alarm_time);
 
 #endif // SAVER_H
