@@ -7,10 +7,6 @@ void ublik_init(void){
     pin_init();
     analog_init();
 
-#if USE_SAVER
-    saver_init();
-#endif
-
 #if USE_COMMS
     comms_init();
     chprintf(CHP,"System Initiated.\n\r");
@@ -19,7 +15,7 @@ void ublik_init(void){
 
 }
 
-void ublik_chk_ind(void){
+void ublik_ind(void){
     led_ind_batt();
 
     con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
@@ -63,20 +59,56 @@ void ublik_batt(void){
     }
 }
 
-void ublik_saver(void){
-    if(HIBERNATE_CONDITION){
-    #if USE_COMMS
-        chprintf(CHP,"Going to Hibernate.\n\r ");
-        delay_ms(ind_tunda);
-    #endif
-        saver_start(HIBERNATE_PERIOD);
+void ublik_con(void){
+
+    con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
+    delay_ms(con_tunda);
+    if(chk_lamp()==1){
+        con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
     }
     else{
-      #if USE_COMMS
-        chprintf(CHP,"Going to Sleep.\n\r");
-        delay_ms(ind_tunda);
-      #endif
-        saver_start(SLEEP_PERIOD);
+        con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
     }
 
+    con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+    delay_ms(con_tunda);
+    if(chk_usb()==1){
+        con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+    }
+    else{
+        con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
+    }
+
+}
+
+void ublik_data(void){
+
+#if USE_COMMS
+    data_print();
+    delay_ms(data_tunda);
+#endif
+
+}
+
+void ublik_sleep(void){
+#if USE_SAVER
+
+    #if USE_COMMS
+      chprintf(CHP,"Going to Sleep.\n\r");
+      delay_ms(ind_tunda);
+    #endif
+
+      sleep_start(SAVER_PERIOD);
+#endif
+}
+
+void ublik_wkup(void){
+#if USE_SAVER
+
+    #if USE_COMMS
+      chprintf(CHP,"Waking Up.\n\r");
+      delay_ms(ind_tunda);
+    #endif
+
+#endif
 }

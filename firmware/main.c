@@ -8,9 +8,9 @@ int main(void) {
   ublik_init();
 
 /*
- * Perform Checking and Indicating
+ * Perform Indicating
  */
-  ublik_chk_ind();
+  ublik_ind();
 
 /*
  * Battere level control
@@ -20,37 +20,29 @@ int main(void) {
   while (true){
 
 /*
- * Sending some data
+ * Perform IO Control
  */
-#if USE_COMMS
-      data_print();
-      delay_ms(data_tunda);
-#endif
-
-/*
- * Saver activated
- */
-#if USE_SAVER
-       ublik_saver();
-#endif
-
-/*
- * Waking up from Sleep
- */
-#if USE_COMMS
-    chprintf(CHP,"WakeUp from Sleep.\n\r");
-    delay_ms(ind_tunda);
-#endif
-
-/*
- * Perform Checking and Indicating
- */
-    ublik_chk_ind();
+    ublik_con();
 
 /*
  * Battere level control
  */
-     ublik_batt();
+    ublik_batt();
+
+/*
+ * Sending some data
+ */
+    ublik_data();
+
+/*
+ * Going Sleep
+ */
+    ublik_sleep();
+
+/*
+ * Waking up from Sleep
+ */
+    ublik_wkup();
 
 /*
  * Continue To next Loop
