@@ -16,9 +16,7 @@ void saver_init(void);
 void wkup_pin_set(FunctionalState NewState);
 void pwr_flag_clear(uint32_t PWR_FLAG);
 
-void alarm_init(uint32_t alarm_time);
-
-void sleep_start(void);
-void hibernate_start(void);
+void sleep_start(uint32_t alarm_time);
+void hibernate_start(uint32_t alarm_time);
 
 #endif // SAVER_H

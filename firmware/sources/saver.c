@@ -64,8 +64,6 @@ static void rtc_cb(RTCDriver *rtcp, rtcevent_t event) {
   }
 }
 
-
-
 void wkup_pin_set(FunctionalState NewState)
 {
   *(__IO uint32_t *) CSR_EWUP_BB = (uint32_t)NewState;
@@ -82,7 +80,8 @@ void saver_init(void){
     rtcGetTime(&RTCD1, &timespec);
 }
 
-void alarm_init(uint32_t alarm_time){
+void sleep_start(uint32_t alarm_time){
+
     chBSemWaitTimeout(&alarm_sem, S2ST(alarm_time + 1));
 
     rtcSTM32GetSecMsec(&RTCD1, &tv_sec, NULL);
@@ -91,9 +90,6 @@ void alarm_init(uint32_t alarm_time){
 
     rtcSetCallback(&RTCD1, rtc_cb);
     extStart(&EXTD1, &extcfg);
-}
-
-void sleep_start(void){
 
     PWR->CR |= PWR_CR_CWUF;
     PWR->CR |= PWR_CR_CSBF;
@@ -101,16 +97,19 @@ void sleep_start(void){
     PWR->CR &= ~PWR_CR_PDDS;
 
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-//    SCB->SCR |= SCB_SCR_SLEEPDEEP;
 
     __WFI();
 }
 
-void hibernate_start(void){
+void hibernate_start(uint32_t alarm_time){
 
-    chSysLock();
+    rtcSTM32GetSecMsec(&RTCD1, &tv_sec, NULL);
+    alarmspec.tv_sec = tv_sec + alarm_time;
+    rtcSetAlarm(&RTCD1, 0, &alarmspec);
 
     wkup_pin_set(ENABLE);
+
+    chSysLock();
     
     PWR->CR |= PWR_CR_CWUF;
     PWR->CR |= PWR_CR_CSBF;
@@ -118,7 +117,6 @@ void hibernate_start(void){
     PWR->CR |= PWR_CR_PDDS;
 
     SCB->SCR |= SCB_SCR_SLEEPDEEP;
-//    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
     __WFI();
 
