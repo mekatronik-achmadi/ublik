@@ -51,10 +51,10 @@ void analog_init(void){
 
 void analog_deinit(void){
     adcStopConversion(&ADCD1);
+//    adcStop(&ADCD1);
     palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_RESET);
     palSetPadMode(GPIOA,ADC_BATT_N,PAL_MODE_RESET);
     palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_RESET);
-//    adcStop(&ADCD1);
 }
 
 uint8_t chk_lamp(void){

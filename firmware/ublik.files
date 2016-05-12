@@ -12,5 +12,7 @@ sources/pin.c
 sources/pin.h
 sources/saver.c
 sources/saver.h
+sources/ublik.c
+sources/ublik.h
 main.c
 ublik_conf.h

@@ -23,6 +23,7 @@
 #include "saver.h"
 #include "comms.h"
 #include "analog.h"
+#include "ublik.h"
 
 #define delay_s chThdSleepSeconds
 #define delay_ms chThdSleepMilliseconds

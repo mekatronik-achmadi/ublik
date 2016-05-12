@@ -1,110 +1,67 @@
 #include "inklusi.h"
 
-uint32_t n_saver;
-
 int main(void) {
 
 /*
  * Initializing system
  */
 
-  halInit();
-  chSysInit();
-
-  pin_init();
-  analog_init();
-
-#if USE_SAVER
-  saver_init();
-#endif
-
-#if USE_COMMS
-  comms_init();
-  chprintf(CHP,"System Initiated.\n\r");
-  delay_ms(ind_tunda);
-#endif
-
-  led_ind_test();
+  ublik_init();
 
 /*
-* Perform Led Indicating
-*/
+ * Perform Checking and Indicating
+ */
 
-  led_ind_batt();
-
-  con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
-  delay_ms(con_tunda);
-  if(chk_lamp()==1){
-      con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
-      led_ind_lamp();
-  }
-  else{
-      con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
-  }
-
-  con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
-  delay_ms(con_tunda);
-  if(chk_usb()==1){
-      con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
-      led_ind_usb();
-  }
-  else{
-      con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
-  }
-
-  if(chk_pv()==1){
-      led_ind_pv();
-  }
-
-  led_ind_off_all(ind_tunda);
+  ublik_chk_ind();
 
 /*
-* Battere level control
-*/
+ * Battere level control
+ */
 
-  if((chk_pv()==1)&&(chk_batt()==4)){
-      con_pv_off();
-  }
-
-  if((chk_usb()==1)&&(chk_batt()==1)){
-      con_pin_set(GPIOB, con_usb_pin, DISABLE);
-  }
-
-  if((chk_lamp()==1)&&(chk_batt()==1)){
-      con_pin_set(GPIOB, con_lamp_pin, DISABLE);
-  }
-
-/*
-* Saver routine
-*/
-  analog_deinit();
-
-  if( (chk_lamp()==0) && (chk_pv()==0 ) && (chk_usb()==0 ) ){
-#if USE_SAVER
-          pin_deinit();
-  #if USE_COMMS
-          chprintf(CHP,"Going to Hibernate.\n\r ");
-          delay_ms(ind_tunda);
-          comms_deinit();
-  #endif
-          n_saver = HIBERNATE_PERIOD;
-#endif
-  }
-  else{
-#if USE_SAVER
-    #if USE_COMMS
-        chprintf(CHP,"Going to Sleep.\n\r");
-        delay_ms(ind_tunda);
-        comms_deinit();
-    #endif
-        n_saver = SLEEP_PERIOD;
-#endif
-  }
-
-  alarm_init(n_saver);
+  ublik_batt();
 
   while (true){
-    standby_start();
+
+/*
+ * Sending some data
+ */
+
+#if USE_COMMS
+      data_print();
+      delay_ms(data_tunda);
+#endif
+
+/*
+ * Saver activated
+ */
+
+#if USE_SAVER
+       ublik_saver();
+#endif
+
+/*
+ * Waking up from Sleep
+ */
+
+#if USE_COMMS
+    chprintf(CHP,"WakeUp from Sleep.\n\r");
+    delay_ms(ind_tunda);
+#endif
+
+/*
+ * Perform Checking and Indicating
+ */
+
+     ublik_chk_ind();
+
+/*
+ * Battere level control
+ */
+
+     ublik_batt();
+
+     delay_ms(proc_tunda);
+
   }
 
   return 0;
