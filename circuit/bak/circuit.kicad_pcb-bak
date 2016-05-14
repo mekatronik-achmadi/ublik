@@ -3,7 +3,7 @@
   (general
     (links 166)
     (no_connects 0)
-    (area 97.974999 51.147809 209.765132 107.683333)
+    (area 97.974999 51.247809 209.665132 107.583333)
     (thickness 1.6)
     (drawings 6)
     (tracks 871)
@@ -69,7 +69,7 @@
     (aux_axis_origin 0 0)
     (visible_elements FFFCCE09)
     (pcbplotparams
-      (layerselection 0x00000_80000001)
+      (layerselection 0x00030_00000000)
       (usegerberextensions false)
       (excludeedgelayer false)
       (linewidth 0.400000)
@@ -89,7 +89,7 @@
       (padsonsilk false)
       (subtractmaskfromsilk false)
       (outputformat 4)
-      (mirror false)
+      (mirror true)
       (drillshape 2)
       (scaleselection 1)
       (outputdirectory /home/achmadi/Documents/ublik_print/))
