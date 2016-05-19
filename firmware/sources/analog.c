@@ -89,7 +89,7 @@ uint8_t chk_batt(void){
     uint8_t lvl;
 
     if(adc_batt<LVL_BATT_1){
-        lvl=0;
+        lvl=1;
     }
     else if((adc_batt>=LVL_BATT_1) && (adc_batt<LVL_BATT_2)){
         lvl=1;

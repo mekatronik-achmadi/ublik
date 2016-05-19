@@ -16,9 +16,9 @@
 #define MIN_ADC_LAMP 100
 #define MIN_ADC_USB 4095
 
-#define LVL_BATT_1 100
-#define LVL_BATT_2 100
-#define LVL_BATT_3 100
-#define LVL_BATT_4 100
+#define LVL_BATT_1 1900
+#define LVL_BATT_2 2000
+#define LVL_BATT_3 2200
+#define LVL_BATT_4 2500
 
 #endif // UBLIK_CONF_H
