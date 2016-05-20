@@ -20,8 +20,10 @@
 
 #define led_ind_pin 7 //B
 
-#define led_batt4_pin 6 //B
-#define led_batt3_pin 5 //B
+//#define led_batt4_pin 6 //B
+//#define led_batt3_pin 5 //B
+#define led_batt4_pin led_ind_pin //B
+#define led_batt3_pin 6 //B
 #define led_batt2_pin 4 //B
 #define led_batt1_pin 3 //B
 

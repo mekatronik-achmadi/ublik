@@ -18,7 +18,6 @@ int main(void) {
   ublik_batt();
 
   while (true){
-
 /*
  * Perform IO Control
  */

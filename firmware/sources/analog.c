@@ -111,12 +111,14 @@ void data_print(void){
 
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay_ms(analog_tunda);
+
+    uint8_t batt_stt = chk_batt();
     
     uint8_t pv_stt;
     if(chk_pv()==1){pv_stt=1;}
     else{pv_stt=0;}
     
-    chprintf(CHP,"a-lamp = %4d | a-usb = %4d | a-batt = %4d | s-pv = %1d \r\n",adc_lamp,adc_usb,adc_batt,pv_stt);
+    chprintf(CHP,"a-lamp = %4d | a-usb = %4d | a-batt = %4d | n-batt = %1d | s-pv = %1d \r\n",adc_lamp,adc_usb,adc_batt,batt_stt, pv_stt);
 
 }
 

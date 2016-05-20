@@ -64,8 +64,7 @@ uint8_t chk_pv(void){
 void led_ind_batt(void){
     uint8_t stt;
 
-//    stt=chk_batt();
-    stt=4;
+    stt=chk_batt();
 
     if(stt==0){
         palSetPad(GPIOB, led_batt1_pin);
@@ -77,7 +76,7 @@ void led_ind_batt(void){
         palSetPad(GPIOB, led_batt2_pin);
     }
     else if(stt==3){
-        palClearPad(GPIOB, led_batt3_pin);
+        palSetPad(GPIOB, led_batt3_pin);
     }
     else if(stt==4){
         palSetPad(GPIOB, led_batt4_pin);
