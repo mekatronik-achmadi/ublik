@@ -1,6 +1,9 @@
 #ifndef UBLIK_CONF_H
 #define UBLIK_CONF_H
 
+#define RUN_TEST 1
+#define RUN_WORK 0
+
 #define ind_tunda 100
 #define con_tunda 100
 #define data_tunda 100

@@ -5,7 +5,6 @@ void ublik_init(void);
 void ublik_ind(void);
 void ublik_batt(void);
 void ublik_data(void);
-void ublik_con(void);
 void ublik_sleep(void);
 void ublik_wkup(void);
 

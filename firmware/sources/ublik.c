@@ -20,7 +20,7 @@ void ublik_ind(void){
 
     con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
     delay_ms(con_tunda);
-    if(chk_lamp()==1){
+    if((chk_lamp()==1) && (chk_batt()>1)){
         con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
         led_ind_lamp();
     }
@@ -30,7 +30,7 @@ void ublik_ind(void){
 
     con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
     delay_ms(con_tunda);
-    if(chk_usb()==1){
+    if((chk_usb()==1) && (chk_batt()>1)){
         con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
         led_ind_usb();
     }
@@ -50,35 +50,13 @@ void ublik_batt(void){
         con_pv_off();
     }
 
-    if((chk_usb()==1)&&(chk_batt()==1)){
-        con_pin_set(GPIOB, con_usb_pin, DISABLE);
-    }
-
-    if((chk_lamp()==1)&&(chk_batt()==1)){
-        con_pin_set(GPIOB, con_lamp_pin, DISABLE);
-    }
-}
-
-void ublik_con(void){
-
-    con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
-    delay_ms(con_tunda);
-    if(chk_lamp()==1){
-        con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
-    }
-    else{
-        con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
-    }
-
-    con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
-    delay_ms(con_tunda);
-    if(chk_usb()==1){
-        con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
-    }
-    else{
+    if((chk_usb()==1)&&(chk_batt()<=1)){
         con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
     }
 
+    if((chk_lamp()==1)&&(chk_batt()<=1)){
+        con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
+    }
 }
 
 void ublik_data(void){
