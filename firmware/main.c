@@ -6,8 +6,11 @@ int main(void){
 /*
  * Initializing system
  */
-  ublik_init();
+    test_init();
 
+    while(1){
+        test_led_show();
+    }
 
 }
 

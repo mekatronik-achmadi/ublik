@@ -1,0 +1,6 @@
+.
+sources
+library/os/hal/include
+library/os/rt/include
+library/os/various
+library/os/hal/lib/streams

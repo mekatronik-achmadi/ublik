@@ -36,9 +36,14 @@
 /*
  * MCU type, supported types are defined in ./os/hal/platforms/hal_lld.h.
  */
-#ifndef STM32F10X_MD
-#define STM32F10X_MD
+//#ifndef STM32F10X_MD
+//#define STM32F10X_MD
+//#endif
+
+#ifndef STM32F10X_LD_VL
+#define STM32F10X_LD_VL
 #endif
+
 
 /*
  * Initial GPIO state
@@ -59,10 +64,6 @@
 #define VAL_GPIODCRL            0x00000000
 #define VAL_GPIODCRH            0x00000000
 #define VAL_GPIODODR            0x00000000
-
-#define VAL_GPIOECRL            0x00000000
-#define VAL_GPIOECRH            0x00000000
-#define VAL_GPIOEODR            0x00000000
 
 /*
  * USB bus activation macro, required by the USB driver.

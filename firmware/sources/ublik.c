@@ -18,24 +18,24 @@ void ublik_init(void){
 void ublik_ind(void){
     led_ind_batt();
 
-    con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
+    con_pin_set(con_gpio, con_lamp_pin, CON_ENABLE);
     delay_ms(con_tunda);
     if((chk_lamp()==1) && (chk_batt()>1)){
-        con_pin_set(GPIOB, con_lamp_pin, CON_ENABLE);
+        con_pin_set(con_gpio, con_lamp_pin, CON_ENABLE);
         led_ind_lamp();
     }
     else{
-        con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
+        con_pin_set(con_gpio, con_lamp_pin, CON_DISABLE);
     }
 
-    con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+    con_pin_set(con_gpio, con_usb_pin, CON_ENABLE);
     delay_ms(con_tunda);
     if((chk_usb()==1) && (chk_batt()>1)){
-        con_pin_set(GPIOB, con_usb_pin, CON_ENABLE);
+        con_pin_set(con_gpio, con_usb_pin, CON_ENABLE);
         led_ind_usb();
     }
     else{
-        con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
+        con_pin_set(con_gpio, con_usb_pin, CON_DISABLE);
     }
 
     if(chk_pv()==1){
@@ -51,11 +51,11 @@ void ublik_batt(void){
     }
 
     if((chk_usb()==1)&&(chk_batt()<=1)){
-        con_pin_set(GPIOB, con_usb_pin, CON_DISABLE);
+        con_pin_set(con_gpio, con_usb_pin, CON_DISABLE);
     }
 
     if((chk_lamp()==1)&&(chk_batt()<=1)){
-        con_pin_set(GPIOB, con_lamp_pin, CON_DISABLE);
+        con_pin_set(con_gpio, con_lamp_pin, CON_DISABLE);
     }
 }
 

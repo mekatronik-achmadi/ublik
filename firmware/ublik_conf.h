@@ -1,8 +1,8 @@
 #ifndef UBLIK_CONF_H
 #define UBLIK_CONF_H
 
-#define RUN_TEST 1
-#define RUN_WORK 0
+#define RUN_TEST 0
+#define RUN_WORK 1
 
 #define ind_tunda 100
 #define con_tunda 100
@@ -17,7 +17,7 @@
 #define SAVER_PERIOD 60  //in second
 
 #define MIN_ADC_LAMP 100
-#define MIN_ADC_USB 4095
+#define MIN_ADC_USB 100
 
 #define LVL_BATT_1 1900
 #define LVL_BATT_2 2000

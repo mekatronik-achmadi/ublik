@@ -43,18 +43,18 @@ static const ADCConversionGroup adcgrpcfg = {
 };
 
 void analog_init(void){
-    palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_INPUT_ANALOG);
-    palSetPadMode(GPIOA,ADC_BATT_N,PAL_MODE_INPUT_ANALOG);
-    palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_INPUT_ANALOG);
+    palSetPadMode(analog_gpio,ADC_LAMP_N,PAL_MODE_INPUT_ANALOG);
+    palSetPadMode(analog_gpio,ADC_BATT_N,PAL_MODE_INPUT_ANALOG);
+    palSetPadMode(analog_gpio,ADC_USB_N,PAL_MODE_INPUT_ANALOG);
     adcStart(&ADCD1, NULL);
 }
 
 void analog_deinit(void){
     adcStopConversion(&ADCD1);
 //    adcStop(&ADCD1);
-    palSetPadMode(GPIOA,ADC_LAMP_N,PAL_MODE_RESET);
-    palSetPadMode(GPIOA,ADC_BATT_N,PAL_MODE_RESET);
-    palSetPadMode(GPIOA,ADC_USB_N,PAL_MODE_RESET);
+    palSetPadMode(analog_gpio,ADC_LAMP_N,PAL_MODE_RESET);
+    palSetPadMode(analog_gpio,ADC_BATT_N,PAL_MODE_RESET);
+    palSetPadMode(analog_gpio,ADC_USB_N,PAL_MODE_RESET);
 }
 
 uint8_t chk_lamp(void){
