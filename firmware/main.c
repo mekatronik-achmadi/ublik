@@ -1,21 +1,5 @@
 #include "inklusi.h"
 
-#if RUN_TEST
-
-int main(void){
-/*
- * Initializing system
- */
-    test_init();
-
-    while(1){
-        test_led_show();
-    }
-
-}
-
-#endif
-
 #if RUN_WORK
 
 int main(void) {

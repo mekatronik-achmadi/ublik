@@ -4,6 +4,7 @@ SOURCESSRC =	$(SOURCES)/board.c \
                 $(SOURCES)/comms.c \
                 $(SOURCES)/analog.c \
                 $(SOURCES)/ublik.c \
-                $(SOURCES)/test.c
+                $(SOURCES)/test_main.c \
+		$(SOURCES)/test.c
 
 SOURCESINC =	$(SOURCES)
