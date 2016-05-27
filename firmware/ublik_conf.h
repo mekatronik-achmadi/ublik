@@ -4,14 +4,13 @@
 #define RUN_TEST 0
 #define RUN_WORK 1
 
-#define ind_tunda 100
-#define con_tunda 100
+#define con_tunda 50
+#define analog_tunda 50
+#define ind_tunda 200
 #define data_tunda 100
-#define proc_tunda 100
-#define saver_tunda 100
-#define analog_tunda 100
+#define proc_tunda 500
 
-#define USE_COMMS 1
+#define USE_COMMS 0
 
 #define USE_SAVER 1
 #define SAVER_PERIOD 60  //in second

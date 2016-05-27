@@ -47,7 +47,7 @@ void pin_deinit(void){
 uint8_t chk_pv(void){
     uint8_t result;
 
-    if(palReadPad(chk_gpio, led_pv_pin)==PAL_HIGH){
+    if(palReadPad(chk_gpio, chk_pv_pin)==PAL_HIGH){
         result=1;
     }
     else{
