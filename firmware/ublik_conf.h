@@ -4,8 +4,8 @@
 #define RUN_TEST 0
 #define RUN_WORK 1
 
-#define con_tunda 50
-#define analog_tunda 50
+#define con_tunda 100
+#define analog_tunda 100
 #define ind_tunda 200
 #define data_tunda 100
 #define proc_tunda 500
@@ -15,7 +15,7 @@
 #define USE_SAVER 1
 #define SAVER_PERIOD 60  //in second
 
-#define MIN_ADC_LAMP 100
+#define MIN_ADC_LAMP 20
 #define MIN_ADC_USB 100
 
 #define LVL_BATT_1 1900

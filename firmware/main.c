@@ -14,16 +14,16 @@ int main(void) {
  */
   ublik_ind();
 
-/*
- * Battere level control
- */
-  ublik_batt();
-
   while (true){
 /*
  * Sending some data
  */
     ublik_data();
+
+/*
+ * Battere level control
+ */
+    ublik_batt();
 
 /*
  * Going Sleep
@@ -34,11 +34,6 @@ int main(void) {
  * Waking up from Sleep
  */
     ublik_wkup();
-
-/*
- * Battere level control
- */
-    ublik_batt();
 
 /*
  * Continue To next Loop
