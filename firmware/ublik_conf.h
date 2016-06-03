@@ -10,12 +10,12 @@
 #define data_tunda 100
 #define proc_tunda 500
 
-#define USE_COMMS 0
+#define USE_COMMS 1
 
 #define USE_SAVER 1
 #define SAVER_PERIOD 60  //in second
 
-#define MIN_ADC_LAMP 20
+#define MIN_ADC_LAMP 5
 #define MIN_ADC_USB 100
 
 #define LVL_BATT_1 1900
