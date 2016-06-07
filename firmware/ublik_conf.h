@@ -5,17 +5,13 @@
 #define RUN_WORK 1
 
 #define con_tunda 100
-#define analog_tunda 100
-#define ind_tunda 200
-#define data_tunda 100
+#define ind_tunda 500
 #define proc_tunda 500
+#define analog_tunda 100
 
-#define USE_COMMS 1
-
-#define USE_SAVER 1
 #define SAVER_PERIOD 60  //in second
 
-#define MIN_ADC_LAMP 5
+#define MIN_ADC_LAMP 25
 #define MIN_ADC_USB 100
 
 #define LVL_BATT_1 1900

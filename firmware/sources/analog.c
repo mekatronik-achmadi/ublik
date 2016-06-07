@@ -118,7 +118,9 @@ void data_print(void){
     if(chk_pv()==1){pv_stt=1;}
     else{pv_stt=0;}
     
-    chprintf(CHP,"a-lamp = %4d | a-usb = %4d | a-batt = %4d | n-batt = %1d | s-pv = %1d \r\n",adc_lamp,adc_usb,adc_batt,batt_stt, pv_stt);
+    uint16_t min_lamp = MIN_ADC_LAMP;
+    uint16_t min_usb = MIN_ADC_USB;
+    chprintf(CHP,"a-lamp = %4d of %4d | a-usb = %4d of %4d | a-batt = %4d | n-batt = %1d | s-pv = %1d \r\n",adc_lamp,min_lamp,adc_usb,min_usb,adc_batt,batt_stt,pv_stt);
 
 }
 

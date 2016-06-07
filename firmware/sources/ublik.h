@@ -2,6 +2,7 @@
 #define UBLIK_H
 
 void ublik_init(void);
+void ublik_out(void);
 void ublik_ind(void);
 void ublik_batt(void);
 void ublik_data(void);

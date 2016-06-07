@@ -10,6 +10,11 @@ int main(void) {
   ublik_init();
 
 /*
+ * Output starting
+ */
+  ublik_out();
+
+/*
  * Perform Indicating
  */
   ublik_ind();
