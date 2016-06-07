@@ -43,13 +43,14 @@ void ublik_batt(void){
         con_pv_off();
     }
 
+    if((chk_lamp()!=1) || (chk_batt()<=1)){
+        con_pin_set(con_gpio, con_lamp_pin, CON_DISABLE);
+    }
+
     if((chk_usb()!=1) || (chk_batt()<=1)){
         con_pin_set(con_gpio, con_usb_pin, CON_DISABLE);
     }
 
-    if((chk_lamp()!=1) || (chk_batt()<=1)){
-        con_pin_set(con_gpio, con_lamp_pin, CON_DISABLE);
-    }
 }
 
 void ublik_data(void){
