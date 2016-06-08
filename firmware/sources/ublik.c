@@ -55,10 +55,12 @@ void ublik_batt(void){
 
 void ublik_data(void){
     data_print();
+    delay_ms(100);
 }
 
 void ublik_sleep(void){
     chprintf(CHP,"Going to Sleep.\n\r");
+    delay_ms(100);
     sleep_start(SAVER_PERIOD);
 }
 

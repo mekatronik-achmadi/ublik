@@ -11,7 +11,7 @@
 
 #define SAVER_PERIOD 60  //in second
 
-#define MIN_ADC_LAMP 10
+#define MIN_ADC_LAMP 5
 #define MIN_ADC_USB 100
 
 #define LVL_BATT_1 1900
