@@ -14,8 +14,8 @@ void ublik_init(void){
 
 void ublik_out(void){
     if(chk_batt()>1){
-        con_pin_set(con_gpio, con_lamp_pin, CON_ENABLE);
-        con_pin_set(con_gpio, con_usb_pin, CON_ENABLE);
+        con_lamp_on();
+        con_usb_on();
         delay_ms(con_tunda);
     }
 }
