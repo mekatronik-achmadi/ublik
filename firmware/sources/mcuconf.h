@@ -14,7 +14,7 @@
     limitations under the License.
 */
 
-#define STM32F100_MCUCONF
+#define STM32F103_MCUCONF
 
 /*
  * STM32F103 drivers configuration.

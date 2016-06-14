@@ -40,8 +40,8 @@
 //#define STM32F10X_MD
 //#endif
 
-#ifndef STM32F10X_LD_VL
-#define STM32F10X_LD_VL
+#ifndef STM32F10X_MD
+#define STM32F10X_MD
 #endif
 
 
