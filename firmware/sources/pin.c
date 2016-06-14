@@ -80,15 +80,6 @@ void led_ind_batt(void){
 
 }
 
-void con_pin_set(GPIO_TypeDef *port, uint16_t pin, uint8_t status){
-    if(status==CON_ENABLE){
-        palSetPad(port,pin);
-    }
-    else if(status==CON_DISABLE){
-        palClearPad(port,pin);
-    }
-}
-
 void led_ind_off_all(systime_t time){
     delay_ms(time);
 

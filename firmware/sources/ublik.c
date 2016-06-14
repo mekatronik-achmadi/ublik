@@ -42,13 +42,22 @@ void ublik_batt(void){
     if((chk_pv()==1) && (chk_batt()==4)){
         con_pv_off();
     }
+    else{
+        con_pv_on();
+    }
 
     if((chk_lamp()!=1) || (chk_batt()<=1)){
-        con_pin_set(con_gpio, con_lamp_pin, CON_DISABLE);
+        con_lamp_off();
+    }
+    else{
+        con_lamp_on();
     }
 
     if((chk_usb()!=1) || (chk_batt()<=1)){
-        con_pin_set(con_gpio, con_usb_pin, CON_DISABLE);
+        con_usb_off();
+    }
+    else{
+        con_usb_on();
     }
 
 }
