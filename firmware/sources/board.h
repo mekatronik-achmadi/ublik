@@ -65,6 +65,10 @@
 #define VAL_GPIODCRH            0x00000000
 #define VAL_GPIODODR            0x00000000
 
+#define VAL_GPIOECRL            0x00000000
+#define VAL_GPIOECRH            0x00000000
+#define VAL_GPIOEODR            0x00000000
+
 /*
  * USB bus activation macro, required by the USB driver.
  */
