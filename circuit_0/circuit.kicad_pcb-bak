@@ -67,7 +67,7 @@
     (pad_drill 1.016)
     (pad_to_mask_clearance 0.2)
     (aux_axis_origin 0 0)
-    (visible_elements FFFDCE09)
+    (visible_elements FFFDCE69)
     (pcbplotparams
       (layerselection 0x00030_00000000)
       (usegerberextensions false)
