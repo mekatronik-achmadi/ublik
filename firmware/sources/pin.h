@@ -13,8 +13,8 @@
 #define con_lamp_off() palClearPad(con_gpio, con_lamp_pin)
 #define con_lamp_on() palSetPad(con_gpio, con_lamp_pin)
 
-#define con_usb_off() palSetPad(con_gpio, con_usb_pin)
-#define con_usb_on() palClearPad(con_gpio, con_usb_pin)
+#define con_usb_off() palClearPad(con_gpio, con_usb_pin)
+#define con_usb_on() palSetPad(con_gpio, con_usb_pin)
 
 void led_pin_init(void);
 void con_pin_init(void);
