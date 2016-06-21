@@ -16,4 +16,5 @@
   (lib (name transistor-power)(type Legacy)(uri /usr/share/kicad/eagle-lbr-imported/eagle/mod/transistor-power.mod)(options "")(descr ""))
   (lib (name Resistors_ThroughHole)(type KiCad)(uri /usr/share/kicad/footprints/Resistors_ThroughHole.pretty)(options "")(descr ""))
   (lib (name Mounting_Holes)(type KiCad)(uri /usr/share/kicad/footprints/Mounting_Holes.pretty)(options "")(descr ""))
+  (lib (name linear)(type Legacy)(uri /usr/share/kicad/eagle-lbr-imported/eagle/mod/linear.mod)(options "")(descr ""))
 )

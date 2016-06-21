@@ -1,4 +1,4 @@
-update=Tue 03 May 2016 06:57:21 PM WIB
+update=Tue 21 Jun 2016 10:00:19 AM WIB
 version=1
 last_client=kicad
 [pcbnew]
@@ -58,12 +58,11 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=linear
-LibName31=stm32
-LibName32=SparkFun
-LibName33=lib/lm2596s
-LibName34=lib/audio-lamp
-LibName35=/usr/share/kicad/eagle-lbr-imported/eagle/lib/switch-omron
-LibName36=/usr/share/kicad/eagle-lbr-imported/eagle/lib/transistor-power
-LibName37=/usr/share/kicad/eagle-lbr-imported/eagle/lib/v-reg-micrel
-LibName38=/usr/share/kicad/eagle-lbr-imported/eagle/lib/linear
+LibName30=stm32
+LibName31=SparkFun
+LibName32=lib/lm2596s
+LibName33=lib/audio-lamp
+LibName34=/usr/share/kicad/eagle-lbr-imported/eagle/lib/switch-omron
+LibName35=/usr/share/kicad/eagle-lbr-imported/eagle/lib/transistor-power
+LibName36=/usr/share/kicad/eagle-lbr-imported/eagle/lib/v-reg-micrel
+LibName37=/usr/share/kicad/eagle-lbr-imported/eagle/lib/linear
