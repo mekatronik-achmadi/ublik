@@ -11,12 +11,12 @@
 
 #define SAVER_PERIOD 60  //in second
 
-#define MIN_ADC_LAMP 450
+#define MIN_ADC_LAMP 200
 #define MIN_ADC_USB 200
 
-#define LVL_BATT_1 2000
-#define LVL_BATT_2 2100
-#define LVL_BATT_3 2300
-#define LVL_BATT_4 2600
+#define LVL_BATT_1 2400
+#define LVL_BATT_2 2500
+#define LVL_BATT_3 2600
+#define LVL_BATT_4 2700
 
 #endif // UBLIK_CONF_H

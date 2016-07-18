@@ -83,13 +83,17 @@ uint8_t chk_usb(void){
 }
 
 uint8_t chk_batt(void){
+    
+    con_pv_off();
+    delay_ms(100);
+    
     adcConvert(&ADCD1, &adcgrpcfg, samples, ADC_GRP1_BUF_DEPTH);
     delay_ms(analog_tunda);
 
     uint8_t lvl;
 
     if(adc_batt<LVL_BATT_1){
-        lvl=1;
+        lvl=0;
     }
     else if((adc_batt>=LVL_BATT_1) && (adc_batt<LVL_BATT_2)){
         lvl=1;
@@ -102,6 +106,10 @@ uint8_t chk_batt(void){
     }
     else if(adc_batt>=LVL_BATT_4){
         lvl=4;
+    }
+    
+    if(lvl<4){
+        con_pv_on();
     }
 
     return lvl;

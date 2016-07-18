@@ -21,7 +21,12 @@ void ublik_out(void){
 }
 
 void ublik_ind(void){
+	
     led_ind_batt();
+
+    if(chk_pv()==1){
+        led_ind_pv();
+    }
 
     if(chk_lamp()==1){
         led_ind_lamp();
@@ -31,29 +36,32 @@ void ublik_ind(void){
         led_ind_usb();
     }
 
-    if(chk_pv()==1){
-        led_ind_pv();
-    }
-
     led_ind_off_all(ind_tunda);
 }
 
 void ublik_batt(void){
-    if((chk_pv()==1) && (chk_batt()==4)){
+    
+    uint8_t lvl_batt=chk_batt();
+
+    if(chk_pv()==1){
+        con_lamp_off();
+    }
+    
+    if((chk_pv()==1) && (lvl_batt==4)){
         con_pv_off();
     }
     else{
         con_pv_on();
     }
 
-    if((chk_lamp()!=1) || (chk_batt()<=1)){
+    if((chk_lamp()!=1) || (lvl_batt<=1)){
         con_lamp_off();
     }
     else{
         con_lamp_on();
     }
 
-    if((chk_usb()!=1) || (chk_batt()<=1)){
+    if((chk_usb()!=1) || (lvl_batt<=1)){
         con_usb_off();
     }
     else{
